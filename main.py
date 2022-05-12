@@ -28,9 +28,9 @@ def show_favorites():
 
 @app.route('/')
 def homepage():
-    selected_list = request.args.get('list_type', "popular")
-    movies = tmdb_client.get_movies_list(list_type=selected_list)["results"][:8]
-    return render_template("homepage.html", movies=movies, list_to_choose = tmdb_client.list_to_choose, selected_list = selected_list)
+    selected_list = request.args.get('list_type','popular')
+    movies = tmdb_client.get_movies_list(selected_list)
+    return render_template("homepage.html", movies=movies["results"][:8], list_to_choose = tmdb_client.list_to_choose, selected_list = selected_list)
 
 @app.context_processor
 def utility_processor():
