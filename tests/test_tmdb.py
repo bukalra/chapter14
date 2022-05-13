@@ -17,7 +17,7 @@ def test_homepage(monkeypatch, n, result):
     api_mock.return_value = result
     monkeypatch.setattr("tmdb_client.call_tmdb_api", api_mock)
 
-    with app.test_client(n) as client:
+    with app.test_client() as client:
         response = client.get(f'/?list_type={n}')
         assert response.status_code == 200
         api_mock.assert_called_once_with(f"api.themoviedb.org/3/movie/{n}")
